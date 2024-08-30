@@ -1,15 +1,43 @@
 import { useState, useMemo } from 'react'
-import { Note, ChordType } from '../types'
+import { Note, Interval } from '../types'
 import { bandoneonNotes, noteNames } from '../constants'
-import { generateChord, findChordOnBandoneon } from '../utils'
+import { findChordOnBandoneon, calculateNoteFromInterval, recognizeChord } from '../utils'
 
 export function useChordState() {
   const [selectedNote, setSelectedNote] = useState<Note>(Note.C);
-  const [selectedChordType, setSelectedChordType] = useState<ChordType>('major');
+  const [selectedIntervals, setSelectedIntervals] = useState<Interval[]>([]);
   const [isOpening, setIsOpening] = useState(true);
 
-  const chord = useMemo(() => generateChord(selectedNote, selectedChordType), [selectedNote, selectedChordType]);
+  const toggleInterval = (interval: Interval) => {
+    setSelectedIntervals(prev => 
+      prev.includes(interval) 
+        ? prev.filter(i => i !== interval)
+        : [...prev, interval].sort((a, b) => intervalToSemitones(a) - intervalToSemitones(b))
+    )
+  }
+
+  const chordIntervals = useMemo(() => {
+    return ['1', ...selectedIntervals] as Interval[];
+  }, [selectedIntervals]);
+
+  const chordName = useMemo(() => {
+    return recognizeChord(selectedNote, chordIntervals);
+  }, [selectedNote, chordIntervals]);
+
+  const chord = useMemo(() => {
+    return chordIntervals.map(interval => calculateNoteFromInterval(selectedNote, interval));
+  }, [selectedNote, chordIntervals]);
+
   const chordNotes = useMemo(() => chord.map(note => noteNames[note]), [chord]);
+
+  const noteToIntervalMap = useMemo(() => {
+    const map: Record<number, Interval> = {};
+    chord.forEach((note, index) => {
+      map[note] = chordIntervals[index];
+    });
+    console.log('noteToIntervalMap:', map);
+    return map;
+  }, [chord, chordIntervals]);
 
   const rightHandNotes = useMemo(() => bandoneonNotes.right[isOpening ? 'open' : 'close'], [isOpening]);
   const leftHandNotes = useMemo(() => bandoneonNotes.left[isOpening ? 'open' : 'close'], [isOpening]);
@@ -17,11 +45,17 @@ export function useChordState() {
   const rightHandChordNotes = useMemo(() => findChordOnBandoneon(chord, rightHandNotes, isOpening), [chord, rightHandNotes, isOpening]);
   const leftHandChordNotes = useMemo(() => findChordOnBandoneon(chord, leftHandNotes, isOpening), [chord, leftHandNotes, isOpening]);
 
+  console.log('Selected Note:', noteNames[selectedNote]);
+  console.log('Selected Intervals:', selectedIntervals);
+  console.log('Chord:', chordNotes);
+  console.log('Right Hand Chord Notes:', rightHandChordNotes);
+  console.log('Left Hand Chord Notes:', leftHandChordNotes);
+
   return {
     selectedNote,
     setSelectedNote,
-    selectedChordType,
-    setSelectedChordType,
+    selectedIntervals,
+    toggleInterval,
     isOpening,
     setIsOpening,
     rightHandNotes,
@@ -29,6 +63,16 @@ export function useChordState() {
     chord,
     chordNotes,
     rightHandChordNotes,
-    leftHandChordNotes
+    leftHandChordNotes,
+    noteToIntervalMap,
+    chordName
   };
+}
+
+function intervalToSemitones(interval: Interval): number {
+  const intervalMap: Record<Interval, number> = {
+    '1': 0, 'b2': 1, '2': 2, 'b3': 3, '3': 4, '4': 5, '#4': 6,
+    '5': 7, 'b6': 8, '6': 9, 'b7': 10, '7': 11
+  }
+  return intervalMap[interval]
 }

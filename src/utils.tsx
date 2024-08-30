@@ -1,4 +1,4 @@
-import { Note, ChordType } from './types'
+import { Note, ChordType, Interval } from './types'
 import { noteNames } from './constants'
 
 export function generateChord(root: Note, type: ChordType): number[] {
@@ -73,3 +73,82 @@ export function generateChord(root: Note, type: ChordType): number[] {
   
     return foundNotes;
   }
+
+export function calculateNoteFromInterval(root: Note, interval: Interval): Note {
+  const semitones = intervalToSemitones(interval)
+  return (root + semitones) % 12
+}
+
+function intervalToSemitones(interval: Interval): number {
+  const intervalMap: Record<Interval, number> = {
+    '1': 0, 'b2': 1, '2': 2, 'b3': 3, '3': 4, '4': 5, '#4': 6,
+    '5': 7, 'b6': 8, '6': 9, 'b7': 10, '7': 11, '8': 12,
+    'b9': 13, '9': 14, '#9': 15, '10': 16, '11': 17, '#11': 18,
+    '12': 19, 'b13': 20, '13': 21
+  }
+  return intervalMap[interval]
+}
+
+export function recognizeChord(root: Note, intervals: Interval[]): string {
+  const rootName = noteNames[root];
+  const intervalSet = new Set(intervals);
+
+  // Don't remove the root note from the interval set
+  let chordName = rootName;
+  let hasThird = false;
+  let hasFifth = false;
+  let hasSeventh = false;
+
+  if (intervalSet.size === 1 && intervalSet.has('1')) {
+    return rootName;
+  }
+
+  if (intervalSet.has('3')) {
+    hasThird = true;
+  } else if (intervalSet.has('b3')) {
+    chordName += 'm';
+    hasThird = true;
+  }
+
+  if (intervalSet.has('5')) {
+    hasFifth = true;
+  } else if (intervalSet.has('b5')) {
+    chordName += 'b5';
+  } else if (intervalSet.has('#5')) {
+    chordName += '#5';
+  }
+
+  if (intervalSet.has('7')) {
+    chordName += 'maj7';
+    hasSeventh = true;
+  } else if (intervalSet.has('b7')) {
+    chordName += '7';
+    hasSeventh = true;
+  }
+
+  if (intervalSet.has('2') || intervalSet.has('9')) {
+    chordName += 'add9';
+  }
+
+  if (intervalSet.has('4') || intervalSet.has('11')) {
+    chordName += 'add11';
+  }
+
+  if (intervalSet.has('6') || intervalSet.has('13')) {
+    chordName += '6';
+  }
+
+  if (!hasThird && !hasFifth && !hasSeventh) {
+    if (intervalSet.has('4')) {
+      chordName += 'sus4';
+    } else if (intervalSet.has('2')) {
+      chordName += 'sus2';
+    }
+  }
+
+  if (!hasThird && !hasFifth && intervalSet.has('b7')) {
+    return rootName + '7no3no5';
+  }
+
+  return chordName;
+}

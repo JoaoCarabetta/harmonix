@@ -1,4 +1,4 @@
-import { Note, ChordType } from './types'
+import { Note, ChordType, Interval } from './types'
 
 export const bandoneonNotes = {
   right: {
@@ -57,3 +57,18 @@ export const rightHandMatrix = [
   [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
   [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 ];
+
+export const intervalColors: Record<Interval, string> = {
+  '1': '#1E90FF',  // Dodger Blue (root note)
+  'b2': '#FF6347',  // Tomato
+  '2': '#FFA500',  // Orange
+  'b3': '#FFD700',  // Gold
+  '3': '#32CD32',  // Lime Green (changed from Green Yellow)
+  '4': '#20B2AA',  // Light Sea Green
+  '#4': '#00CED1',  // Dark Turquoise
+  '5': '#4169E1',  // Royal Blue
+  'b6': '#8A2BE2',  // Blue Violet
+  '6': '#9932CC',  // Dark Orchid
+  'b7': '#C71585',  // Medium Violet Red
+  '7': '#FF1493',  // Deep Pink
+}

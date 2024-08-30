@@ -6,15 +6,16 @@ interface BandoneonButtonProps {
   isActive: boolean;
   isRightHand: boolean;
   note: string;
+  color: string;
 }
 
-export const BandoneonButton: React.FC<BandoneonButtonProps> = ({ x, y, isActive, isRightHand, note }) => (
+export const BandoneonButton: React.FC<BandoneonButtonProps> = ({ x, y, isActive, isRightHand, note, color }) => (
   <g>
     <circle
       cx={x}
       cy={y}
       r="15"
-      fill={isActive ? (isRightHand ? "#ff4136" : "#0074D9") : "#F0F0F0"}
+      fill={color}
       stroke="#000000"
       strokeWidth="2"
     />

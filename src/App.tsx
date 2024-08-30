@@ -6,24 +6,29 @@ import { Button } from "./components/ui/button"
 import { ChordDisplay } from './components/ChordDisplay'
 import { BandoneonHand } from './components/BandoneonHand'
 import { useChordState } from './hooks/useChordState'
-import { bandoneonNotes, chordTypes, noteNames } from './constants'
-import { Note, ChordType } from './types'
+import { bandoneonNotes, noteNames, intervalColors } from './constants'
+import { Note, Interval } from './types'
 
 export default function App() {
   const {
     selectedNote,
     setSelectedNote,
-    selectedChordType,
-    setSelectedChordType,
+    selectedIntervals,
+    toggleInterval,
     isOpening,
     setIsOpening,
     rightHandNotes,
     leftHandNotes,
-    chord,
     chordNotes,
     rightHandChordNotes,
-    leftHandChordNotes
+    leftHandChordNotes,
+    noteToIntervalMap,
+    chordName
   } = useChordState()
+
+  const intervals: Interval[] = [
+    'b2', '2', 'b3', '3', '4', '#4', '5', 'b6', '6', 'b7', '7'
+  ]
 
   return (
     <Card className="w-full max-w-5xl mx-auto border-none shadow-none">
@@ -32,8 +37,20 @@ export default function App() {
       </CardHeader>
       {/* Bandoneon Hands */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[400px]">
-        <BandoneonHand title="Left Hand" notes={leftHandNotes} activeNotes={leftHandChordNotes} isRightHand={false} />
-        <BandoneonHand title="Right Hand" notes={rightHandNotes} activeNotes={rightHandChordNotes} isRightHand={true} />
+        <BandoneonHand 
+          title="Left Hand" 
+          notes={leftHandNotes} 
+          activeNotes={leftHandChordNotes} 
+          isRightHand={false}
+          noteToIntervalMap={noteToIntervalMap}
+        />
+        <BandoneonHand 
+          title="Right Hand" 
+          notes={rightHandNotes} 
+          activeNotes={rightHandChordNotes} 
+          isRightHand={true}
+          noteToIntervalMap={noteToIntervalMap}
+        />
       </div>
 
       {/* Opening/Closing Toggle */}
@@ -50,49 +67,50 @@ export default function App() {
       <CardContent className="space-y-8">
         {/* Root Note Selection */}
         <div className="space-y-2">
-          <div className="text-sm font-medium mb-2">Select a root note:</div>
+          <div className="text-sm font-medium mb-2">Select root note:</div>
           <div className="flex flex-wrap gap-2">
-            {Object.keys(Note).filter(key => isNaN(Number(key))).map((note) => (
+            {Object.values(Note).filter(note => typeof note === 'number').map((note) => (
               <Button
                 key={note}
-                variant={selectedNote === Note[note] ? "default" : "outline"}
-                onClick={() => setSelectedNote(Note[note])}
-                className={`w-16 ${
-                  selectedNote === Note[note]
-                    ? "bg-blue-500 text-white hover:bg-blue-600"
-                    : "bg-white text-black hover:bg-gray-200"
-                } border border-black`}
+                variant={selectedNote === note ? "default" : "outline"}
+                onClick={() => setSelectedNote(note as Note)}
+                className="w-12"
+                style={{
+                  backgroundColor: selectedNote === note ? intervalColors['1'] : '#FFFFFF',
+                  color: selectedNote === note ? '#FFFFFF' : '#000000',
+                  borderColor: '#000000'
+                }}
               >
-                {note.includes('Sharp') ? note.replace('Sharp', '#') : note}
+                {noteNames[note as number]}
               </Button>
             ))}
           </div>
         </div>
 
-        {/* Chord Type Selection */}
+        {/* Interval Selection */}
         <div className="space-y-2">
-          <div className="text-sm font-medium mb-2">Select a chord type:</div>
+          <div className="text-sm font-medium mb-2">Select intervals:</div>
           <div className="flex flex-wrap gap-2">
-            {chordTypes.map((type) => (
+            {intervals.map((interval) => (
               <Button
-                key={type}
-                variant={selectedChordType === type ? "default" : "outline"}
-                onClick={() => setSelectedChordType(type as ChordType)}
-                className={`w-24 ${
-                  selectedChordType === type
-                    ? "bg-green-500 text-white hover:bg-green-600"
-                    : "bg-white text-black hover:bg-gray-200"
-                } border border-black`}
+                key={interval}
+                variant={selectedIntervals.includes(interval) ? "default" : "outline"}
+                onClick={() => toggleInterval(interval)}
+                className="w-12"
+                style={{
+                  backgroundColor: selectedIntervals.includes(interval) ? intervalColors[interval] : '#FFFFFF',
+                  color: selectedIntervals.includes(interval) ? '#FFFFFF' : '#000000',
+                  borderColor: '#000000'
+                }}
               >
-                {type}
+                {interval}
               </Button>
             ))}
           </div>
         </div>
 
         <ChordDisplay 
-          rootNote={noteNames[selectedNote]}
-          chordType={selectedChordType}
+          chordName={chordName}
           notes={chordNotes}
         />
 
