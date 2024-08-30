@@ -28,9 +28,8 @@ export default function App() {
   return (
     <Card className="w-full max-w-5xl mx-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className="text-center">Bandoneon Chord Finder</CardTitle>
+        <CardTitle className="text-center text-3xl font-bold">Bandoneon Chord Finder</CardTitle>
       </CardHeader>
-      
       {/* Bandoneon Hands */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[400px]">
         <BandoneonHand title="Left Hand" notes={leftHandNotes} activeNotes={leftHandChordNotes} isRightHand={false} />

@@ -15,7 +15,7 @@ export const BandoneonHand: React.FC<BandoneonHandProps> = ({ title, notes, acti
 
   return (
     <Card className="w-full h-full border-none shadow-none">
-      <CardHeader>
+      <CardHeader className='p-1'>
         <CardTitle className="text-center">{title}</CardTitle>
       </CardHeader>
       <CardContent className="h-[calc(100%-4rem)] flex items-center justify-center p-2">
