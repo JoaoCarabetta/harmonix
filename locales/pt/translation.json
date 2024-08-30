@@ -1,10 +1,20 @@
 {
     "title": "Buscador de Acordes de Bandoneón",
-    "selectRootNote": "Selecione a nota raiz:",
+    "selectRootNote": "Selecione a nota fundamental:",
     "selectIntervals": "Selecione os intervalos:",
     "leftHand": "Mão Esquerda",
     "rightHand": "Mão Direita",
     "opening": "Abrindo",
     "closing": "Fechando",
+    "commonChords": "Acordes Comuns",
+    "chordTypes": {
+        "major": "Maior",
+        "minor": "Menor",
+        "dominant7": "Dominante 7ª",
+        "major7": "Maior 7ª",
+        "minor7": "Menor 7ª",
+        "diminished": "Diminuto",
+        "augmented": "Aumentado"
+    },
     "footer": "Criado com ♥ por João Carabetta | \"A música é a linguagem universal da humanidade\" - Henry Wadsworth Longfellow"
-  }
+}
