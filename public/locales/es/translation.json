@@ -1,0 +1,10 @@
+{
+    "title": "Buscador de Acordes de Bandoneón",
+    "selectRootNote": "Selecciona la nota raíz:",
+    "selectIntervals": "Selecciona los intervalos:",
+    "leftHand": "Mano Izquierda",
+    "rightHand": "Mano Derecha",
+    "opening": "Abriendo",
+    "closing": "Cerrando",
+    "footer": "Creado con ♥ por João Carabetta | \"La música es el lenguaje universal de la humanidad\" - Henry Wadsworth Longfellow"
+  }

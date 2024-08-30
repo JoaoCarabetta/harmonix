@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card"
 import { Button } from "./components/ui/button"
 import { ChordDisplay } from './components/ChordDisplay'
@@ -10,6 +11,8 @@ import { bandoneonNotes, noteNames, intervalColors } from './constants'
 import { Note, Interval } from './types'
 
 export default function App() {
+  const { t, i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const {
     selectedNote,
     setSelectedNote,
@@ -30,22 +33,48 @@ export default function App() {
     'b2', '2', 'b3', '3', '4', '#4', '5', 'b6', '6', 'b7', '7'
   ]
 
+  const changeLanguage = (lng: string) => {
+    console.log('Changing language to:', lng);
+    i18n.changeLanguage(lng).then(() => {
+      console.log('Language changed successfully to:', i18n.language);
+      setCurrentLanguage(lng); // This will force a re-render
+    }).catch((error) => {
+      console.error('Error changing language:', error);
+    });
+  };
+
+  useEffect(() => {
+    console.log('Current language:', currentLanguage);
+  }, [currentLanguage]);
+
   return (
     <Card className="w-full max-w-5xl mx-auto border-none shadow-none">
       <CardHeader>
-        <CardTitle className="text-center text-3xl font-bold">Bandoneon Chord Finder</CardTitle>
+        <CardTitle className="text-center text-3xl font-bold">{t('title')}</CardTitle>
+        <div className="flex justify-center space-x-2 mt-4">
+          {['en', 'pt', 'es'].map((lang) => (
+            <Button
+              key={lang}
+              variant={currentLanguage === lang ? "default" : "outline"}
+              onClick={() => changeLanguage(lang)}
+              className="w-12"
+            >
+              {lang.toUpperCase()}
+            </Button>
+          ))}
+        </div>
       </CardHeader>
       {/* Bandoneon Hands */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[400px]">
         <BandoneonHand 
-          title="Left Hand" 
+          title={t('leftHand')}
           notes={leftHandNotes} 
           activeNotes={leftHandChordNotes} 
           isRightHand={false}
           noteToIntervalMap={noteToIntervalMap}
         />
         <BandoneonHand 
-          title="Right Hand" 
+          title={t('rightHand')}
           notes={rightHandNotes} 
           activeNotes={rightHandChordNotes} 
           isRightHand={true}
@@ -60,14 +89,14 @@ export default function App() {
           onClick={() => setIsOpening(!isOpening)}
           className="w-32"
         >
-          {isOpening ? "Opening" : "Closing"}
+          {isOpening ? t('opening') : t('closing')}
         </Button>
       </div>
         
       <CardContent className="space-y-8">
         {/* Root Note Selection */}
         <div className="space-y-2">
-          <div className="text-sm font-medium mb-2">Select root note:</div>
+          <div className="text-sm font-medium mb-2">{t('selectRootNote')}</div>
           <div className="flex flex-wrap gap-2">
             {Object.values(Note).filter(note => typeof note === 'number').map((note) => (
               <Button
@@ -89,7 +118,7 @@ export default function App() {
 
         {/* Interval Selection */}
         <div className="space-y-2">
-          <div className="text-sm font-medium mb-2">Select intervals:</div>
+          <div className="text-sm font-medium mb-2">{t('selectIntervals')}</div>
           <div className="flex flex-wrap gap-2">
             {intervals.map((interval) => (
               <Button
@@ -116,7 +145,7 @@ export default function App() {
 
         {/* Footer */}
         <div className="text-center text-sm text-gray-500 mt-8 flex items-center justify-center space-x-2">
-          <span>Created with ♥ by João Carabetta | "Music is the universal language of mankind" - Henry Wadsworth Longfellow | </span>
+          <span>{t('footer')}</span>
           <a href="https://github.com/JoaoCarabetta/bandoneon-chord" target="_blank" rel="noopener noreferrer">
             {/* Add GitHub logo here if needed */}
           </a>

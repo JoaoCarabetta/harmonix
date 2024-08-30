@@ -1,0 +1,10 @@
+{
+    "title": "Bandoneon Chord Finder",
+    "selectRootNote": "Select root note:",
+    "selectIntervals": "Select intervals:",
+    "leftHand": "Left Hand",
+    "rightHand": "Right Hand",
+    "opening": "Opening",
+    "closing": "Closing",
+    "footer": "Created with ♥ by João Carabetta | \"Music is the universal language of mankind\" - Henry Wadsworth Longfellow"
+  }
