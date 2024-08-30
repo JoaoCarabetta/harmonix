@@ -71,8 +71,20 @@ export function useChordState() {
 
 function intervalToSemitones(interval: Interval): number {
   const intervalMap: Record<Interval, number> = {
-    '1': 0, 'b2': 1, '2': 2, 'b3': 3, '3': 4, '4': 5, '#4': 6,
-    '5': 7, 'b6': 8, '6': 9, 'b7': 10, '7': 11
+    '1': 0,
+    'b2': 1,
+    '2': 2,
+    'b3': 3,
+    '3': 4,
+    '4': 5,
+    '#4': 6,
+    '5': 7,
+    'b5': 6,
+    '#5': 8,
+    'b6': 8,
+    '6': 9,
+    'b7': 10,
+    '7': 11
   }
   return intervalMap[interval]
 }

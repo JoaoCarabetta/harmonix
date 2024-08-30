@@ -82,9 +82,7 @@ export function calculateNoteFromInterval(root: Note, interval: Interval): Note 
 function intervalToSemitones(interval: Interval): number {
   const intervalMap: Record<Interval, number> = {
     '1': 0, 'b2': 1, '2': 2, 'b3': 3, '3': 4, '4': 5, '#4': 6,
-    '5': 7, 'b6': 8, '6': 9, 'b7': 10, '7': 11, '8': 12,
-    'b9': 13, '9': 14, '#9': 15, '10': 16, '11': 17, '#11': 18,
-    '12': 19, 'b13': 20, '13': 21
+    '5': 7, 'b5': 6, '#5': 8, 'b6': 8, '6': 9, 'b7': 10, '7': 11,
   }
   return intervalMap[interval]
 }
@@ -126,15 +124,15 @@ export function recognizeChord(root: Note, intervals: Interval[]): string {
     hasSeventh = true;
   }
 
-  if (intervalSet.has('2') || intervalSet.has('9')) {
+  if (intervalSet.has('2') ) {
     chordName += 'add9';
   }
 
-  if (intervalSet.has('4') || intervalSet.has('11')) {
+  if (intervalSet.has('4') ) {
     chordName += 'add11';
   }
 
-  if (intervalSet.has('6') || intervalSet.has('13')) {
+  if (intervalSet.has('6') ) {
     chordName += '6';
   }
 

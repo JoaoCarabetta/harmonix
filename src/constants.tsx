@@ -63,10 +63,12 @@ export const intervalColors: Record<Interval, string> = {
   'b2': '#FF6347',  // Tomato
   '2': '#FFA500',  // Orange
   'b3': '#FFD700',  // Gold
-  '3': '#32CD32',  // Lime Green (changed from Green Yellow)
+  '3': '#32CD32',  // Lime Green
   '4': '#20B2AA',  // Light Sea Green
   '#4': '#00CED1',  // Dark Turquoise
   '5': '#4169E1',  // Royal Blue
+  'b5': '#8B4513',  // Saddle Brown
+  '#5': '#9932CC',  // Dark Orchid
   'b6': '#8A2BE2',  // Blue Violet
   '6': '#9932CC',  // Dark Orchid
   'b7': '#C71585',  // Medium Violet Red
