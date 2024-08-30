@@ -219,6 +219,50 @@ export default function App() {
       <CardHeader>
         <CardTitle className="text-center">Bandoneon Chord Finder</CardTitle>
       </CardHeader>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-center">Left Hand</CardTitle>
+          </CardHeader>
+          <CardContent className="h-[450px] flex items-center justify-center p-4">
+            <div className="w-full h-full flex items-center justify-center">
+              <BandoneonHand 
+                buttons={leftHandButtons} 
+                activeButtons={leftHandChordNotes} 
+                isRightHand={false} 
+                notes={leftHandNotes}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-center">Right Hand</CardTitle>
+          </CardHeader>
+          <CardContent className="h-[450px] flex items-center justify-center p-4">
+            <div className="w-full h-full flex items-center justify-center">
+              <BandoneonHand 
+                buttons={rightHandButtons} 
+                activeButtons={rightHandChordNotes} 
+                isRightHand={true} 
+                notes={rightHandNotes}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="flex justify-center mb-8"> 
+        <Button
+          variant={isOpening ? "default" : "outline"}
+          onClick={() => setIsOpening(!isOpening)}
+          className="w-32"
+        >
+          {isOpening ? "Opening" : "Closing"}
+        </Button>
+      </div>
+        
       <CardContent className="space-y-8">
         <div className="space-y-2">
           <div className="text-sm font-medium mb-2">Select a root note:</div>
@@ -260,49 +304,6 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <Button
-            variant={isOpening ? "default" : "outline"}
-            onClick={() => setIsOpening(!isOpening)}
-            className="w-32"
-          >
-            {isOpening ? "Opening" : "Closing"}
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">Left Hand</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[450px] flex items-center justify-center p-4">
-              <div className="w-full h-full flex items-center justify-center">
-                <BandoneonHand 
-                  buttons={leftHandButtons} 
-                  activeButtons={leftHandChordNotes} 
-                  isRightHand={false} 
-                  notes={leftHandNotes}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">Right Hand</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[450px] flex items-center justify-center p-4">
-              <div className="w-full h-full flex items-center justify-center">
-                <BandoneonHand 
-                  buttons={rightHandButtons} 
-                  activeButtons={rightHandChordNotes} 
-                  isRightHand={true} 
-                  notes={rightHandNotes}
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
         <ChordDisplay 
           rootNote={noteToString(selectedNote)}
           chordType={selectedChordType}
