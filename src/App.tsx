@@ -312,7 +312,6 @@ export default function App() {
         <div className="text-center text-sm text-gray-500 mt-8 flex items-center justify-center space-x-2">
           <span>Created with ♥ by João Carabetta | "Music is the universal language of mankind" - Henry Wadsworth Longfellow | </span>
           <a href="https://github.com/JoaoCarabetta/bandoneon-chord" target="_blank" rel="noopener noreferrer">
-            {/* <Image src="/github-mark.svg" alt="GitHub" width={20} height={20} /> */}
           </a>
         </div>
       </CardContent>
