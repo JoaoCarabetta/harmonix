@@ -14,18 +14,19 @@ export const BandoneonButton: React.FC<BandoneonButtonProps> = ({ x, y, isActive
     <circle
       cx={x}
       cy={y}
-      r="15"
-      fill={color}
-      stroke="#000000"
-      strokeWidth="2"
+      r="20"
+      fill={isActive ? color : "#FFFFFF"}
+      stroke={isActive ? "#4A5568" : "#CBD5E0"}
+      strokeWidth="1.5"
     />
     <text
       x={x}
       y={y}
       textAnchor="middle"
       dominantBaseline="central"
-      fontSize="10"
-      fill={isActive ? "#FFFFFF" : "#000000"}
+      fontSize="14"
+      fill={isActive ? "#FFFFFF" : "#4A5568"}
+      fontWeight={isActive ? "bold" : "normal"}
     >
       {note}
     </text>
