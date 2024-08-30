@@ -5,7 +5,7 @@ import { findChordOnBandoneon, calculateNoteFromInterval, recognizeChord } from 
 
 export function useChordState() {
   const [selectedNote, setSelectedNote] = useState<Note>(Note.C);
-  const [selectedIntervals, setSelectedIntervals] = useState<Interval[]>([]);
+  const [selectedIntervals, setSelectedIntervals] = useState<Interval[]>(['3', '5']);
   const [isOpening, setIsOpening] = useState(true);
 
   const toggleInterval = (interval: Interval) => {
