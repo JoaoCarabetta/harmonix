@@ -21,8 +21,8 @@ export const BandoneonHand: React.FC<BandoneonHandProps> = ({
 
   return (
     <div className="w-full h-full flex items-center justify-center py-8">
-      <svg width="100%" height="100%" viewBox="0 0 500 250" preserveAspectRatio="xMidYMid meet">
-        <g transform="translate(20, 20) scale(0.9)">
+      <svg width="100%" height="100%" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(40, 40) scale(1.8)">
           {buttons.map((button) => {
             const isActive = activeNotes.includes(button.note);
             const noteWithoutOctave = button.note.replace(/\d+$/, '');
