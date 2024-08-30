@@ -65,7 +65,8 @@ export function useChordState() {
     rightHandChordNotes,
     leftHandChordNotes,
     noteToIntervalMap,
-    chordName
+    chordName,
+    setSelectedIntervals  // Add this line
   };
 }
 

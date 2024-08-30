@@ -8,7 +8,7 @@ import { ChordDisplay } from './components/ChordDisplay'
 import { BandoneonHand } from './components/BandoneonHand'
 import { useChordState } from './hooks/useChordState'
 import { bandoneonNotes, noteNames, intervalColors } from './constants'
-import { Note, Interval } from './types'
+import { Note, Interval, ChordType } from './types'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function App() {
@@ -28,7 +28,8 @@ export default function App() {
     rightHandChordNotes,
     leftHandChordNotes,
     noteToIntervalMap,
-    chordName
+    chordName,
+    setSelectedIntervals
   } = useChordState()
 
   const intervals: Interval[] = [
@@ -41,6 +42,38 @@ export default function App() {
     }).catch((error) => {
       console.error('Error changing language:', error);
     });
+  };
+
+  const commonChords: ChordType[] = ['major', 'minor', 'dominant7', 'major7', 'minor7', 'diminished', 'augmented'];
+
+  const getChordIntervals = (chordType: ChordType): Interval[] => {
+    switch(chordType) {
+      case 'major':
+        return ['3', '5'];
+      case 'minor':
+        return ['b3', '5'];
+      case 'dominant7':
+        return ['3', '5', 'b7'];
+      case 'major7':
+        return ['3', '5', '7'];
+      case 'minor7':
+        return ['b3', '5', 'b7'];
+      case 'diminished':
+        return ['b3', 'b5', 'b7'];
+      case 'augmented':
+        return ['3', '#5'];
+      default:
+        return [];
+    }
+  };
+
+  const selectCommonChord = (chordType: ChordType) => {
+    setSelectedIntervals(getChordIntervals(chordType));
+  };
+
+  const isChordSelected = (chordType: ChordType) => {
+    const chordIntervals = getChordIntervals(chordType);
+    return JSON.stringify(selectedIntervals.sort()) === JSON.stringify(chordIntervals.sort());
   };
 
   return (
@@ -82,6 +115,27 @@ export default function App() {
                   className={`h-10 ${selectedNote === note ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
                 >
                   {noteNames[note as number]}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Common Chords */}
+          <div className="mb-4">
+            <div className="text-sm font-medium mb-2">{t('commonChords')}</div>
+            <div className="grid grid-cols-2 gap-2">
+              {commonChords.map((chordType) => (
+                <Button
+                  key={chordType}
+                  variant="outline"
+                  onClick={() => selectCommonChord(chordType)}
+                  className={`h-10 text-xs transition-colors duration-200 ${
+                    isChordSelected(chordType)
+                      ? 'bg-black text-white' 
+                      : 'hover:bg-gray-200'
+                  }`}
+                >
+                  {t(`chordTypes.${chordType}`)}
                 </Button>
               ))}
             </div>

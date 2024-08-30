@@ -6,5 +6,15 @@
     "rightHand": "Right Hand",
     "opening": "Opening",
     "closing": "Closing",
+    "commonChords": "Common Chords",
+    "chordTypes": {
+        "major": "Major",
+        "minor": "Minor",
+        "dominant7": "Dominant 7th",
+        "major7": "Major 7th",
+        "minor7": "Minor 7th",
+        "diminished": "Diminished",
+        "augmented": "Augmented"
+    },
     "footer": "Created with ♥ by João Carabetta | \"Music is the universal language of mankind\" - Henry Wadsworth Longfellow"
-  }
+}

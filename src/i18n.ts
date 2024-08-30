@@ -14,11 +14,8 @@ i18n
       escapeValue: false,
     },
     backend: {
-      loadPath: 'public/locales/{{lng}}/translation.json',
+      loadPath: '/bandoneon-chord/locales/{{lng}}/translation.json',
     },
-    react: {
-      useSuspense: false
-    }
   });
 
 export default i18n;
