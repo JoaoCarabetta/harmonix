@@ -1,0 +1,32 @@
+{
+    "title": "Recherche d'Accords de Bandonéon",
+    "selectRootNote": "Sélectionner la note fondamentale :",
+    "selectIntervals": "Sélectionner les intervalles :",
+    "leftHand": "Main Gauche",
+    "rightHand": "Main Droite",
+    "opening": "Ouverture",
+    "closing": "Fermeture",
+    "commonChords": "Accords Communs",
+    "greekModes": "Modes Grecs",
+    "bandoneon": "Bandonéon",
+    "guitar": "Guitare",
+    "chordTypes": {
+        "major": "Majeur",
+        "minor": "Mineur",
+        "dominant7": "Septième Dominante",
+        "major7": "Septième Majeure",
+        "minor7": "Septième Mineure",
+        "diminished": "Diminué",
+        "augmented": "Augmenté"
+    },
+    "modes": {
+        "ionian": "Ionien",
+        "dorian": "Dorien",
+        "phrygian": "Phrygien",
+        "lydian": "Lydien",
+        "mixolydian": "Mixolydien",
+        "aeolian": "Éolien",
+        "locrian": "Locrien"
+    },
+    "footer": "Créé avec ♥ par João Carabetta | \"La musique est la langue universelle de l'humanité\" - Henry Wadsworth Longfellow"
+}

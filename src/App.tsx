@@ -6,15 +6,17 @@ import { Card, CardContent } from "./components/ui/card"
 import { Button } from "./components/ui/button"
 import { ChordDisplay } from './components/ChordDisplay'
 import { BandoneonHand } from './components/BandoneonHand'
+import GuitarFretboard from './components/GuitarFretboard'
 import { useChordState } from './hooks/useChordState'
 import { bandoneonNotes, noteNames, intervalColors } from './constants'
-import { Note, Interval, ChordType } from './types'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Note, Interval, ChordType, Instrument } from './types'
+import { ChevronLeft, ChevronRight, Guitar, Music } from 'lucide-react'
 
 export default function App() {
   const { t, i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [selectedInstrument, setSelectedInstrument] = useState<Instrument>('bandoneon');
   const {
     selectedNote,
     setSelectedNote,
@@ -33,7 +35,7 @@ export default function App() {
   } = useChordState()
 
   const intervals: Interval[] = [
-    'b2', '2', 'b3', '3', '4', '#4', '5', 'b6', '6', 'b7', '7'
+    'b2', '2', 'b3', '3', '4', '#4', '5', 'b6', '6', 'b7', '7M'
   ]
 
   const changeLanguage = (lng: string) => {
@@ -45,6 +47,10 @@ export default function App() {
   };
 
   const commonChords: ChordType[] = ['major', 'minor', 'dominant7', 'major7', 'minor7', 'diminished', 'augmented'];
+  
+  type Mode = 'ionian' | 'dorian' | 'phrygian' | 'lydian' | 'mixolydian' | 'aeolian' | 'locrian';
+  
+  const modes: Mode[] = ['ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian'];
 
   const getChordIntervals = (chordType: ChordType): Interval[] => {
     switch(chordType) {
@@ -55,7 +61,7 @@ export default function App() {
       case 'dominant7':
         return ['3', '5', 'b7'];
       case 'major7':
-        return ['3', '5', '7'];
+        return ['3', '5', '7M'];
       case 'minor7':
         return ['b3', '5', 'b7'];
       case 'diminished':
@@ -76,12 +82,64 @@ export default function App() {
     return JSON.stringify(selectedIntervals.sort()) === JSON.stringify(chordIntervals.sort());
   };
 
+  const getModeIntervals = (mode: Mode): Interval[] => {
+    switch(mode) {
+      case 'ionian': // Major scale
+        return ['2', '3', '4', '5', '6', '7M'];
+      case 'dorian':
+        return ['2', 'b3', '4', '5', '6', 'b7'];
+      case 'phrygian':
+        return ['b2', 'b3', '4', '5', 'b6', 'b7'];
+      case 'lydian':
+        return ['2', '3', '#4', '5', '6', '7M'];
+      case 'mixolydian':
+        return ['2', '3', '4', '5', '6', 'b7'];
+      case 'aeolian': // Natural minor
+        return ['2', 'b3', '4', '5', 'b6', 'b7'];
+      case 'locrian':
+        return ['b2', 'b3', '4', 'b5', 'b6', 'b7'];
+      default:
+        return [];
+    }
+  };
+
+  const selectMode = (mode: Mode) => {
+    setSelectedIntervals(getModeIntervals(mode));
+  };
+
+  const isModeSelected = (mode: Mode) => {
+    const modeIntervals = getModeIntervals(mode);
+    return JSON.stringify(selectedIntervals.sort()) === JSON.stringify(modeIntervals.sort());
+  };
+
   return (
     <div className="w-full h-screen flex">
       {/* Fixed Control Panel */}
       <div className="w-64 bg-gray-100 overflow-y-auto flex-shrink-0">
         <div className="h-full flex flex-col p-4">
           <h1 className="text-xl font-bold mb-4">{t('title')}</h1>
+          
+          {/* Instrument Selector */}
+          <div className="mb-4">
+            <div className="flex rounded-md overflow-hidden">
+              <Button
+                variant={selectedInstrument === 'bandoneon' ? "default" : "outline"}
+                onClick={() => setSelectedInstrument('bandoneon')}
+                className={`flex-1 gap-2 ${selectedInstrument === 'bandoneon' ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+              >
+                <Music className="h-4 w-4" />
+                {t('bandoneon')}
+              </Button>
+              <Button
+                variant={selectedInstrument === 'guitar' ? "default" : "outline"}
+                onClick={() => setSelectedInstrument('guitar')}
+                className={`flex-1 gap-2 ${selectedInstrument === 'guitar' ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+              >
+                <Guitar className="h-4 w-4" />
+                {t('guitar')}
+              </Button>
+            </div>
+          </div>
           
           {/* Opening/Closing Toggle */}
           <div className="mb-4">
@@ -141,6 +199,27 @@ export default function App() {
             </div>
           </div>
 
+          {/* Greek Modes */}
+          <div className="mb-4">
+            <div className="text-sm font-medium mb-2">{t('greekModes')}</div>
+            <div className="grid grid-cols-2 gap-2">
+              {modes.map((mode) => (
+                <Button
+                  key={mode}
+                  variant="outline"
+                  onClick={() => selectMode(mode)}
+                  className={`h-10 text-xs transition-colors duration-200 ${
+                    isModeSelected(mode)
+                      ? 'bg-black text-white' 
+                      : 'hover:bg-gray-200'
+                  }`}
+                >
+                  {t(`modes.${mode}`)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
           {/* Interval Selection */}
           <div className="mb-4">
             <div className="text-sm font-medium mb-2">{t('selectIntervals')}</div>
@@ -171,7 +250,7 @@ export default function App() {
           {/* Language Selector */}
           <div className="mt-auto">
             <div className="flex justify-center space-x-2">
-              {['en', 'pt', 'es'].map((lang) => (
+              {['en', 'pt', 'es', 'fr'].map((lang) => (
                 <Button
                   key={lang}
                   variant={currentLanguage === lang ? "default" : "outline"}
@@ -186,24 +265,34 @@ export default function App() {
         </div>
       </div>
 
-      {/* Bandoneon Hands */}
+      {/* Main Content Area */}
       <div className="flex-grow flex flex-col">
-        <div className="flex-1 w-full h-1/2">
-          <BandoneonHand 
-            notes={leftHandNotes} 
-            activeNotes={leftHandChordNotes} 
-            isRightHand={false}
+        {selectedInstrument === 'bandoneon' ? (
+          <>
+            <div className="flex-1 w-full h-1/2">
+              <BandoneonHand 
+                notes={leftHandNotes} 
+                activeNotes={leftHandChordNotes} 
+                isRightHand={false}
+                noteToIntervalMap={noteToIntervalMap}
+              />
+            </div>
+            <div className="flex-1 w-full h-1/2">
+              <BandoneonHand 
+                notes={rightHandNotes} 
+                activeNotes={rightHandChordNotes} 
+                isRightHand={true}
+                noteToIntervalMap={noteToIntervalMap}
+              />
+            </div>
+          </>
+        ) : (
+          <GuitarFretboard
+            activeNotes={chordNotes}
             noteToIntervalMap={noteToIntervalMap}
+            intervalColors={intervalColors}
           />
-        </div>
-        <div className="flex-1 w-full h-1/2">
-          <BandoneonHand 
-            notes={rightHandNotes} 
-            activeNotes={rightHandChordNotes} 
-            isRightHand={true}
-            noteToIntervalMap={noteToIntervalMap}
-          />
-        </div>
+        )}
       </div>
     </div>
   )

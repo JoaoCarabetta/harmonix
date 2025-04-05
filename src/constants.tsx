@@ -72,5 +72,5 @@ export const intervalColors: Record<Interval, string> = {
   'b6': '#8A2BE2',  // Blue Violet
   '6': '#9932CC',  // Dark Orchid
   'b7': '#C71585',  // Medium Violet Red
-  '7': '#FF1493',  // Deep Pink
+  '7M': '#FF1493',  // Deep Pink
 }

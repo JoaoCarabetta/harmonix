@@ -1,0 +1,8 @@
+---
+description: do not translate, only if explicitly prompted
+globs: 
+alwaysApply: false
+---
+do not translate, only if explicitly prompted.
+
+Use just english first

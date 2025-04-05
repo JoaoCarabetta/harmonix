@@ -85,7 +85,7 @@ function intervalToSemitones(interval: Interval): number {
     'b6': 8,
     '6': 9,
     'b7': 10,
-    '7': 11
+    '7M': 11
   }
   return intervalMap[interval]
 }
