@@ -77,21 +77,6 @@ const GuitarFretboard: React.FC<GuitarFretboardProps> = ({
           </div>
         ))}
 
-        {/* Fret markers */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          {[3, 5, 7, 9, 12, 15].map((fret) => (
-            <div
-              key={fret}
-              className="absolute top-1/2 w-24 flex justify-center"
-              style={{
-                left: `${fret * 6 + 4}rem`,
-                transform: 'translateY(-50%)',
-              }}
-            >
-              <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-            </div>
-          ))}
-        </div>
 
         {/* Fret numbers */}
         <div className="flex mt-4">
