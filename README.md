@@ -7,10 +7,10 @@ Harmonix is an elegant, interactive tool for exploring music theory concepts acr
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="docs/images/bandoneon-mode.png" alt="Bandoneon Mode" width="800"/>
+  <img src="imgs/bandoneon.png" alt="Bandoneon Mode" width="800"/>
   <p><em>Bandoneon Mode - Visualize both hands with opening/closing positions</em></p>
   
-  <img src="docs/images/guitar-mode.png" alt="Guitar Mode" width="800"/>
+  <img src="imgs/guitar.png" alt="Guitar Mode" width="800"/>
   <p><em>Guitar Mode - Interactive fretboard with interval highlighting</em></p>
 </div>
 
