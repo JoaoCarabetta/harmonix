@@ -11,6 +11,7 @@ import { useChordState } from './hooks/useChordState'
 import { bandoneonNotes, noteNames, intervalColors } from './constants'
 import { Note, Interval, ChordType, Instrument } from './types'
 import { ChevronLeft, ChevronRight, Guitar, Music } from 'lucide-react'
+import * as gtag from './lib/gtag'
 
 export default function App() {
   const { t, i18n } = useTranslation();
