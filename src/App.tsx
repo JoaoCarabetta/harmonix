@@ -142,24 +142,26 @@ export default function App() {
           </div>
           
           {/* Opening/Closing Toggle */}
-          <div className="mb-4">
-            <div className="flex rounded-md overflow-hidden">
-              <Button
-                variant={isOpening ? "default" : "outline"}
-                onClick={() => setIsOpening(true)}
-                className={`flex-1 ${isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
-              >
-                {t('opening')}
-              </Button>
-              <Button
-                variant={!isOpening ? "default" : "outline"}
-                onClick={() => setIsOpening(false)}
-                className={`flex-1 ${!isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
-              >
-                {t('closing')}
-              </Button>
+          {selectedInstrument === 'bandoneon' && (
+            <div className="mb-4">
+              <div className="flex rounded-md overflow-hidden">
+                <Button
+                  variant={isOpening ? "default" : "outline"}
+                  onClick={() => setIsOpening(true)}
+                  className={`flex-1 ${isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+                >
+                  {t('opening')}
+                </Button>
+                <Button
+                  variant={!isOpening ? "default" : "outline"}
+                  onClick={() => setIsOpening(false)}
+                  className={`flex-1 ${!isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+                >
+                  {t('closing')}
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Root Note Selection */}
           <div className="mb-4">
