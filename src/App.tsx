@@ -114,54 +114,50 @@ export default function App() {
 
   return (
     <div className="w-full h-screen flex">
+      {/* Floating Instrument Buttons */}
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+        <Button
+          variant={selectedInstrument === 'bandoneon' ? "default" : "outline"}
+          onClick={() => setSelectedInstrument('bandoneon')}
+          className={`gap-2 shadow-lg hover:shadow-xl transition-all ${selectedInstrument === 'bandoneon' ? 'bg-black text-white hover:bg-gray-800' : 'bg-white/80 backdrop-blur-sm text-black hover:bg-gray-200'}`}
+        >
+          <Music className="h-4 w-4" />
+          {t('bandoneon')}
+        </Button>
+        <Button
+          variant={selectedInstrument === 'guitar' ? "default" : "outline"}
+          onClick={() => setSelectedInstrument('guitar')}
+          className={`gap-2 shadow-lg hover:shadow-xl transition-all ${selectedInstrument === 'guitar' ? 'bg-black text-white hover:bg-gray-800' : 'bg-white/80 backdrop-blur-sm text-black hover:bg-gray-200'}`}
+        >
+          <Guitar className="h-4 w-4" />
+          {t('guitar')}
+        </Button>
+      </div>
+
       {/* Fixed Control Panel */}
       <div className="w-64 bg-gray-100 overflow-y-auto flex-shrink-0">
         <div className="h-full flex flex-col p-4">
           <h1 className="text-xl font-bold mb-4">{t('title')}</h1>
           
-          {/* Instrument Selector */}
+          {/* Opening/Closing Toggle */}
           <div className="mb-4">
             <div className="flex rounded-md overflow-hidden">
               <Button
-                variant={selectedInstrument === 'bandoneon' ? "default" : "outline"}
-                onClick={() => setSelectedInstrument('bandoneon')}
-                className={`flex-1 gap-2 ${selectedInstrument === 'bandoneon' ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+                variant={isOpening ? "default" : "outline"}
+                onClick={() => setIsOpening(true)}
+                className={`flex-1 ${isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
               >
-                <Music className="h-4 w-4" />
-                {t('bandoneon')}
+                {t('opening')}
               </Button>
               <Button
-                variant={selectedInstrument === 'guitar' ? "default" : "outline"}
-                onClick={() => setSelectedInstrument('guitar')}
-                className={`flex-1 gap-2 ${selectedInstrument === 'guitar' ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
+                variant={!isOpening ? "default" : "outline"}
+                onClick={() => setIsOpening(false)}
+                className={`flex-1 ${!isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
               >
-                <Guitar className="h-4 w-4" />
-                {t('guitar')}
+                {t('closing')}
               </Button>
             </div>
           </div>
-          
-          {/* Opening/Closing Toggle */}
-          {selectedInstrument === 'bandoneon' && (
-            <div className="mb-4">
-              <div className="flex rounded-md overflow-hidden">
-                <Button
-                  variant={isOpening ? "default" : "outline"}
-                  onClick={() => setIsOpening(true)}
-                  className={`flex-1 ${isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
-                >
-                  {t('opening')}
-                </Button>
-                <Button
-                  variant={!isOpening ? "default" : "outline"}
-                  onClick={() => setIsOpening(false)}
-                  className={`flex-1 ${!isOpening ? 'bg-black text-white hover:bg-gray-800' : 'text-black hover:bg-gray-200'}`}
-                >
-                  {t('closing')}
-                </Button>
-              </div>
-            </div>
-          )}
           
           {/* Root Note Selection */}
           <div className="mb-4">
@@ -268,7 +264,7 @@ export default function App() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-grow flex flex-col">
+      <div className="flex-grow flex flex-col pt-16">
         {selectedInstrument === 'bandoneon' ? (
           <>
             <div className="flex-1 w-full h-1/2">
