@@ -1,70 +1,103 @@
-# Bandoneon
+# 🎵 Harmonix - Interactive Music Theory Explorer
 
-A modern web application built with React, TypeScript, and Vite that helps users with bandoneon chords.
+Harmonix is an elegant, interactive tool for exploring music theory concepts across different instruments. Currently supporting bandoneon and guitar, it provides a visual and intuitive way to understand chords, scales, and musical intervals.
 
-## Tech Stack
+🌐 **[Try it live!](https://joaocarabetta.github.io/harmonix)**
 
-- React 18.3 with TypeScript
-- Vite for fast development and building
-- Tailwind CSS for styling
-- Radix UI components for accessible UI elements
-- i18next for internationalization
-- ESLint for code quality
+## 📸 Screenshots
 
-## Getting Started
+<div align="center">
+  <img src="docs/images/bandoneon-mode.png" alt="Bandoneon Mode" width="800"/>
+  <p><em>Bandoneon Mode - Visualize both hands with opening/closing positions</em></p>
+  
+  <img src="docs/images/guitar-mode.png" alt="Guitar Mode" width="800"/>
+  <p><em>Guitar Mode - Interactive fretboard with interval highlighting</em></p>
+</div>
+
+## ✨ Features
+
+- **Multi-Instrument Support**
+  - 🪗 Bandoneon visualization with opening/closing reed positions
+  - 🎸 Interactive guitar fretboard display
+
+- **Comprehensive Music Theory Tools**
+  - 🎼 Visual chord construction and exploration
+  - 🔄 Real-time interval visualization
+  - 🎹 Common chord presets (Major, Minor, 7th, etc.)
+  - 🎵 Greek mode exploration (Ionian, Dorian, etc.)
+
+- **User-Friendly Interface**
+  - 💫 Modern, minimalist design
+  - 🎨 Color-coded intervals for easy recognition
+  - 🔄 Seamless instrument switching
+  - 🌈 Interactive chord display
+
+- **Internationalization**
+  - 🌍 Supports multiple languages:
+    - English
+    - Portuguese
+    - Spanish
+    - French
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (latest LTS version recommended)
+- Node.js (v14 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/joaocarabetta/bandoneon-chord.git
-cd bandoneon
+git clone https://github.com/yourusername/harmonix.git
+cd harmonix
 ```
 
 2. Install dependencies:
 ```bash
 npm install
+# or
+yarn install
 ```
 
-### Development
-
-To start the development server:
-
+3. Start the development server:
 ```bash
 npm run dev
+# or
+yarn dev
 ```
 
-The application will be available at `http://localhost:5173`
+4. Open your browser and navigate to `http://localhost:3000`
 
-### Building for Production
+## 🛠️ Built With
 
-To create a production build:
+- [React](https://reactjs.org/) - Frontend framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [i18next](https://www.i18next.com/) - Internationalization
 
-```bash
-npm run build
-```
+## 🤝 Contributing
 
-To preview the production build:
+Contributions are welcome! Feel free to:
 
-```bash
-npm run preview
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Project Structure
+## 📝 License
 
-- `/src` - Source code
-- `/public` - Static assets
-- `/dist` - Production build output
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributing
+## 🙏 Acknowledgments
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- Inspired by the rich musical heritage of the bandoneon and its role in tango music
+- Special thanks to the music theory community for their invaluable resources
 
-## License
+---
 
-This project is open source. Please check the repository for license details.
+Made with ♥ by [Your Name]
+
+*"Music is the universal language of mankind" - Henry Wadsworth Longfellow*
