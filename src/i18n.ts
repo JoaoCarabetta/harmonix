@@ -15,7 +15,7 @@ i18n
       escapeValue: false,
     },
     backend: {
-      loadPath: '/bandoneon-chord/locales/{{lng}}/translation.json',
+      loadPath: '/harmonix/locales/{{lng}}/translation.json',
     },
   });
 
