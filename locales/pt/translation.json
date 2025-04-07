@@ -1,20 +1,32 @@
 {
     "title": "Buscador de Acordes de Bandoneón",
-    "selectRootNote": "Selecione a nota fundamental:",
-    "selectIntervals": "Selecione os intervalos:",
+    "selectRootNote": "Selecionar nota fundamental:",
+    "selectIntervals": "Selecionar intervalos:",
     "leftHand": "Mão Esquerda",
     "rightHand": "Mão Direita",
     "opening": "Abrindo",
     "closing": "Fechando",
     "commonChords": "Acordes Comuns",
+    "greekModes": "Modos Gregos",
+    "bandoneon": "Bandoneón",
+    "guitar": "Violão",
     "chordTypes": {
         "major": "Maior",
         "minor": "Menor",
-        "dominant7": "Dominante 7ª",
-        "major7": "Maior 7ª",
-        "minor7": "Menor 7ª",
+        "dominant7": "Sétima Dominante",
+        "major7": "Sétima Maior",
+        "minor7": "Sétima Menor",
         "diminished": "Diminuto",
         "augmented": "Aumentado"
+    },
+    "modes": {
+        "ionian": "Jônio",
+        "dorian": "Dórico",
+        "phrygian": "Frígio",
+        "lydian": "Lídio",
+        "mixolydian": "Mixolídio",
+        "aeolian": "Eólio",
+        "locrian": "Lócrio"
     },
     "footer": "Criado com ♥ por João Carabetta | \"A música é a linguagem universal da humanidade\" - Henry Wadsworth Longfellow"
 }

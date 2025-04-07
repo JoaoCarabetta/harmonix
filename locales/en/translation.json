@@ -7,6 +7,9 @@
     "opening": "Opening",
     "closing": "Closing",
     "commonChords": "Common Chords",
+    "greekModes": "Greek Modes",
+    "bandoneon": "Bandoneon",
+    "guitar": "Guitar",
     "chordTypes": {
         "major": "Major",
         "minor": "Minor",
@@ -15,6 +18,15 @@
         "minor7": "Minor 7th",
         "diminished": "Diminished",
         "augmented": "Augmented"
+    },
+    "modes": {
+        "ionian": "Ionian",
+        "dorian": "Dorian",
+        "phrygian": "Phrygian",
+        "lydian": "Lydian",
+        "mixolydian": "Mixolydian",
+        "aeolian": "Aeolian",
+        "locrian": "Locrian"
     },
     "footer": "Created with ♥ by João Carabetta | \"Music is the universal language of mankind\" - Henry Wadsworth Longfellow"
 }
